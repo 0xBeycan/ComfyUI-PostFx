@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+.claude/
+# keep the luts/ folder but ignore user-dropped cube files
+luts/*.cube

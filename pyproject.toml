@@ -1,0 +1,22 @@
+[project]
+name = "comfyui-postfx"
+version = "1.0.0"
+description = "Theme-based film-emulation & post-processing nodes for ComfyUI, powered by the postfx pipeline."
+authors = [{ name = "0xBeycan" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "postfx>=1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/0xBeycan/ComfyUI-PostFx"
+Repository = "https://github.com/0xBeycan/ComfyUI-PostFx"
+"Bug Tracker" = "https://github.com/0xBeycan/ComfyUI-PostFx/issues"
+
+# ComfyUI Registry metadata (https://docs.comfy.org/registry/publishing)
+[tool.comfy]
+PublisherId = "0xbeycan"
+DisplayName = "ComfyUI-PostFx"
+Icon = ""
