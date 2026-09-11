@@ -32,13 +32,30 @@ LUTS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__
 # --- Catalogs (built once, used to populate dropdowns) --------------------
 
 def theme_names():
-    """All built-in theme stems, ordered signature -> luts -> experimental."""
-    return [stem for stem, _desc, _cat in list_themes()]
+    """Dropdown labels for every built-in theme, 'category/stem' (e.g.
+    'signature/01_portra_400'), ordered signature -> luts -> experimental.
+    """
+    return [f"{cat}/{stem}" if cat else stem for stem, _desc, cat in list_themes()]
+
+
+def theme_stem(name):
+    """Dropdown label -> theme stem accepted by load_theme. A bare stem (older
+    saved workflows) passes through unchanged.
+    """
+    return name.rsplit("/", 1)[-1]
+
+
+def default_theme(names):
+    """portra_400 when present, else the first entry."""
+    for name in names:
+        if theme_stem(name).endswith("portra_400"):
+            return name
+    return names[0]
 
 
 def theme_tooltip():
-    """`theme -> 'category · description'` map, for dropdown tooltips."""
-    return {stem: (f"{cat} · {desc}" if desc else cat)
+    """`label -> 'category · description'` map, for dropdown tooltips."""
+    return {(f"{cat}/{stem}" if cat else stem): (f"{cat} · {desc}" if desc else cat)
             for stem, desc, cat in list_themes()}
 
 
@@ -107,7 +124,7 @@ def mask_to_np_list(mask, count, hw):
 
 __all__ = [
     "POSTFX_LOOK", "LUTS_DIR",
-    "theme_names", "theme_tooltip", "condition_names", "lut_files",
+    "theme_names", "theme_stem", "default_theme", "theme_tooltip", "condition_names", "lut_files",
     "neutral_look", "merge_look", "clone_look",
     "image_to_np_list", "np_list_to_image", "mask_to_np_list",
     "postfx", "get_condition", "load_theme", "resolve_theme", "DEFAULTS",

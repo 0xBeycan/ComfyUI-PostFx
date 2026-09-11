@@ -22,7 +22,7 @@ Restart ComfyUI. The nodes appear under the **PostFx** category.
 
 | Node | In → Out | What it does |
 |------|----------|--------------|
-| **PostFx Apply** | IMAGE (+ *look*, *mask*) → IMAGE | The core node. Applies a **theme** + **condition** + **strength** to an image batch. A connected `look` overrides the theme dropdown; an optional `mask` limits the effect to the masked region. |
+| **PostFx Apply** | IMAGE (+ *look*, *mask*) → IMAGE | The core node. Applies a **theme** + **condition** + **strength** to an image batch. `theme = none` passes the image through untouched (bypass switch for production workflows). A connected `look` overrides the theme dropdown; an optional `mask` limits the effect to the masked region. |
 | **PostFx Theme** | → LOOK | Emits a built-in theme as a `look`, to start a chain from a named theme. |
 | **PostFx Custom Look** | (*look*) → LOOK | Build a look from common controls (white balance, exposure, contrast, vibrance/saturation, grain, vignette, halation, clarity). With a `look` input, only the knobs you move off neutral override it. |
 | **PostFx LUT** | (*look*) → LOOK | Attach a 3D `.cube` LUT. Standalone by default; connect a `look` to layer the LUT on top of a theme. |

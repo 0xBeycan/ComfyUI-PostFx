@@ -18,15 +18,16 @@ class PostFxApply:
 
     @classmethod
     def INPUT_TYPES(cls):
-        themes = u.theme_names()
-        default_theme = "portra_400" if "portra_400" in themes else themes[0]
+        themes = ["none"] + u.theme_names()
+        default_theme = u.default_theme(themes)
         conditions = u.condition_names()
         return {
             "required": {
                 "image": ("IMAGE",),
                 "theme": (themes, {"default": default_theme,
-                                   "tooltip": "Built-in look. Ignored when a "
-                                              "'look' input is connected."}),
+                                   "tooltip": "Built-in look. 'none' passes the "
+                                              "image through untouched. Ignored "
+                                              "when a 'look' input is connected."}),
                 "condition": (conditions, {"default": "neutral",
                                            "tooltip": "Shooting condition: scales "
                                                       "grain/chroma/halation only."}),
@@ -51,7 +52,9 @@ class PostFxApply:
 
     def apply(self, image, theme, condition, strength, seed, batch_seed,
               look=None, mask=None):
-        look_cfg = look if look is not None else u.resolve_theme(theme)
+        if look is None and theme == "none":
+            return (image,)
+        look_cfg = look if look is not None else u.resolve_theme(u.theme_stem(theme))
         cond_cfg = u.get_condition(condition)
 
         frames = u.image_to_np_list(image)

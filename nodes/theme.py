@@ -18,7 +18,7 @@ class PostFxTheme:
     @classmethod
     def INPUT_TYPES(cls):
         themes = u.theme_names()
-        default_theme = "portra_400" if "portra_400" in themes else themes[0]
+        default_theme = u.default_theme(themes)
         return {
             "required": {
                 "theme": (themes, {"default": default_theme}),
@@ -26,7 +26,7 @@ class PostFxTheme:
         }
 
     def load(self, theme):
-        return (u.load_theme(theme),)
+        return (u.load_theme(u.theme_stem(theme)),)
 
 
 NODE_CLASS_MAPPINGS = {"PostFxTheme": PostFxTheme}
