@@ -46,7 +46,11 @@ class PostFxApply:
                                                     "Custom Look / LUT node. "
                                                     "Overrides 'theme'."}),
                 "mask": ("MASK", {"tooltip": "Apply the effect only where the "
-                                             "mask is white; blend with original."}),
+                                             "mask is white; blend with original. "
+                                             "An all-black mask (e.g. LoadImage "
+                                             "on an image without alpha) is "
+                                             "ignored and the effect applies "
+                                             "everywhere."}),
             },
         }
 
@@ -59,6 +63,10 @@ class PostFxApply:
 
         frames = u.image_to_np_list(image)
         h, w = frames[0].shape[:2]
+        # LoadImage emits an all-zero placeholder mask for images without an
+        # alpha channel; blending against it would be a silent no-op.
+        if mask is not None and not bool(mask.any()):
+            mask = None
         masks = (u.mask_to_np_list(mask, len(frames), (h, w))
                  if mask is not None else None)
 
