@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-postfx"
 version = "1.1.0"
-description = "Theme-based film-emulation & post-processing nodes for ComfyUI, powered by the postfx pipeline."
+description = "[DEPRECATED - moved to ComfyUI-BCNodes] Theme-based film-emulation & post-processing nodes for ComfyUI, powered by the postfx pipeline."
 authors = [{ name = "0xBeycan" }]
 license = { text = "MIT" }
 readme = "README.md"

@@ -1,5 +1,22 @@
 # ComfyUI-PostFx
 
+> [!IMPORTANT]
+> **This repository is no longer maintained.** These nodes have been ported to
+> **[ComfyUI-BCNodes](https://github.com/0xBeycan/ComfyUI-BCNodes)** and all further
+> development happens there. Install that pack instead of this one.
+>
+> | Node here | Node in BCNodes |
+> | --- | --- |
+> | `PostFxApply` | `BC_PostFxApply` |
+> | `PostFxTheme` | `BC_PostFxTheme` |
+> | `PostFxCustomLook` | `BC_PostFxCustomLook` |
+> | `PostFxLut` | `BC_PostFxLut` |
+> | `PostFxSignatureSheet` | `BC_PostFxSignatureSheet` |
+>
+> The registration keys change, so a workflow saved against this pack has to be
+> re-wired to the `BC_` nodes once. Everything below is kept for reference only;
+> no fixes or new features will land here.
+
 **Theme-based film-emulation & post-processing nodes for ComfyUI**, powered by
 the [`postfx`](https://github.com/0xBeycan/postfx) pipeline — film stocks,
 cinematic grades and `.cube` LUTs, defined in YAML, running on the CPU (no GPU,
